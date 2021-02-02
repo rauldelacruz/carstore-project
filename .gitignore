@@ -158,4 +158,5 @@ dmypy.json
 !.vscode/extensions.json
 *.code-workspace
 
+/media
 # End of https://www.toptal.com/developers/gitignore/api/django,vscode
