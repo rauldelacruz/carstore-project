@@ -68,6 +68,12 @@ class Car(models.Model):
         ('Accidented', 'Accidented')
     )
 
+    drivetrain_choices = (
+        ('FWD', 'FWD'),
+        ('RWD', 'RWD'),
+        ('AWD', 'AWD')
+    )
+
     title = models.CharField(max_length=255)
     location = models.CharField(max_length=100)
     color = models.CharField(max_length=100)
@@ -86,6 +92,7 @@ class Car(models.Model):
     body_style = models.CharField(choices= body_style_choices, max_length=100)
     engine = models.CharField(max_length=100, blank=True)
     transmission = models.CharField(choices= transmission_choices, max_length=100)
+    drivetrain = models.CharField(choices = drivetrain_choices, max_length=10)
     mileage = models.IntegerField()
     doors = models.CharField(choices=door_choices, max_length=10)
     passengers = models.IntegerField()

@@ -38,57 +38,54 @@
         </div>
         <!-- Search box 3 start -->
         <div class="search-box-4 sb-8">
-            <form action="#" method="">
+            <form action="{% url  'search' %}" method="">
                 <div class="form-group">
-                    <input type="text" name="keyword" placeholder="Search by name" class="form-control">
+                    <input type="text" name="keyword" placeholder="Search" class="form-control">
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-brand">
-                        <option selected="true" disabled="disabled">Brand</option>
-                        <option>Audi</option>
-                        <option>BMW</option>
-                        <option>Honda</option>
-                        <option>Nissan</option>
+                    <select class="form-control search-fields" name="make">
+                        <option selected="true" disabled="disabled">Make</option>
+                        {% for make in makes %}
+                            <option value="{{ make }}">{{ make }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-make">
-                        <option selected="true" disabled="disabled">Model</option>
-                        <option>BMW</option>
-                        <option>Honda</option>
-                        <option>Lamborghini Huracán</option>
-                        <option>Sports Car</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-control search-fields" name="select-location">
+                    <select class="form-control search-fields" name="location">
                         <option selected="true" disabled="disabled">Location</option>
-                        <option>United States</option>
-                        <option>United Kingdom</option>
+                        {% for location in locations %}
+                            <option value="{{ location }}">{{ location }}</option>
+                        {% endfor %}
+                        
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-year">
+                    <select class="form-control search-fields" name="year">
                         <option selected="true" disabled="disabled">Year</option>
-                        <option>2016</option>
-                        <option>2017</option>
-                        <option>2018</option>
-                        <option>2019</option>
+                        {% for year in years %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-type">
-                        <option selected="true" disabled="disabled">Select Type Of Car</option>
-                        <option>Sedan</option>
-                        <option>Sports</option>
-                        <option>Hatchback</option>
-                        <option>Pickup Truck</option>
-                        <option>SUV</option>
+                    <select class="form-control search-fields" name="body_style">
+                        <option selected="true" disabled="disabled">Body style</option>
+                        {% for body_style in body_styles %}
+                            <option value="{{ body_style }}">{{ body_style }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control search-fields" name="transmission">
+                        <option selected="true" disabled="disabled">Transmission</option>
+                        {% for transmission in transmissions %}
+                            <option value="{{ transmission }}">{{ transmission }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="range-slider clearfix">
                                 <label>Price</label>
-                                <div data-min="0" data-max="150000"  data-min-name="min_price" data-max-name="max_price" data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div data-min="0" data-max="1500000"  data-min-name="min_price" data-max-name="max_price" data-unit="MXN" class="range-slider-ui ui-slider" aria-disabled="false"></div>
                                 <div class="clearfix"></div>
                             </div>
                 <div class="form-group">
@@ -128,7 +125,7 @@
                 <div class="slick-slide-item">
                     <div class="car-box-3">
                         <div class="car-thumbnail">
-                            <a href="car-details.html" class="car-img">
+                            <a href="{% url 'car_details' car.id %} class="car-img">
                                 <div class="tag-2">Featured</div>
                                 <div class="price-box">
                                     <span>${{ car.price | intcomma }}</span>
@@ -170,12 +167,12 @@
                         </div>
                         <div class="detail">
                             <h1 class="title">
-                                <a href="car-details.html">{{ car.title }}</a>
+                                <a href="{% url 'car_details' car.id %}">{{ car.title }}</a>
                             </h1>
                             <div class="location">
-                                <a href="car-details.html">
-                                    <i class="flaticon-pin"> </i> {{ car.location }}
-                                </a>
+                                
+                                <i class="flaticon-pin"> </i> {{ car.location }}
+                                
                             </div>
                             <ul class="facilities-list clearfix">
                                 <li>{{ car.fuel_type }}</li>
@@ -203,7 +200,7 @@
 </div>
 <!-- Featured car end -->
 
-<!-- Rent car start -->
+<!-- Latest car start -->
 <div class="featured-car content-area">
     <div class="container">
         <!-- Main title -->
@@ -216,7 +213,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="car-box">
                     <div class="car-thumbnail">
-                        <a href="car-details.html" class="car-img">
+                        <a href="{% url 'car_details' car.id %}" class="car-img">
                             <div class="tag">For Sale</div>
                             <img class="d-block w-100" src="{{ car.car_photo.url }}" alt="car" style="min-height: 260px; max-height: 260px;">
                             <div class="facilities-list clearfix">
@@ -268,12 +265,10 @@
                     </div>
                     <div class="detail">
                         <h1 class="title">
-                            <a href="car-details.html">{{ car.title }}</a>
+                            <a href="{% url 'car_details' car.id %}">{{ car.title }}</a>
                         </h1>
                         <div class="location">
-                            <a href="car-details.html">
-                                <i class="flaticon-pin"> </i> {{ car.location }}
-                            </a>
+                            <i class="flaticon-pin"> </i> {{ car.location }}
                         </div>
                     </div>
                     <div class="footer clearfix">
@@ -291,7 +286,7 @@
         </div>
     </div>
 </div>
-<!-- Rent car end -->
+<!-- Latest car end -->
 
 
 <!-- Our team start -->
@@ -376,7 +371,7 @@
                                         <span class="del-2">$1050.00</span>
                                     </div>
                                     <div class="">
-                                        <a href="car-details.html" class="btn btn-md btn-round btn-theme">Convertible</a>
+                                        <a href="#" class="btn btn-md btn-round btn-theme">Convertible</a>
                                     </div>
                                 </div>
                             </div>
