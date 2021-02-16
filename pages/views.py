@@ -1,5 +1,7 @@
 from cars.models import Car
-from django.shortcuts import render
+from contacts.models import Contact
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -37,4 +39,8 @@ def services(request):
     return render(request, 'pages/services.html')
 
 def contact(request):
+    if request.method == 'POST':
+        messages.success(request, 'Thank you for contacting us. We will get back to you shortly')
+        return redirect('contact')
+
     return render(request, 'pages/contact.html')
